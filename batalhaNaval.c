@@ -1,40 +1,81 @@
 #include <stdio.h>
 
-// Desafio Batalha Naval - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
-// Siga os comentários para implementar cada parte do desafio.
-
 int main() {
-    // Nível Novato - Posicionamento dos Navios
-    // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
-    // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
-    // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
 
-    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
+    // -----------------------------
+    // 1. DECLARAÇÃO DO TABULEIRO
+    // -----------------------------
+    // Matriz 10x10 inicializada com água (0)
+    int tabuleiro[10][10] = {0};
 
-    // Nível Mestre - Habilidades Especiais com Matrizes
-    // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
-    // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
-    // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
+    // -----------------------------
+    // 2. DECLARAÇÃO DOS NAVIOS
+    // -----------------------------
+    // Cada navio ocupa 3 posições
+    int navioHorizontal[3] = {3, 3, 3}; // Navio horizontal
+    int navioVertical[3]   = {3, 3, 3}; // Navio vertical
 
-    // Exemplos de exibição das habilidades:
-    // Exemplo para habilidade em cone:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 1 1 1 1 1
-    
-    // Exemplo para habilidade em octaedro:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 0 0 1 0 0
+    // -----------------------------
+    // 3. COORDENADAS INICIAIS
+    // -----------------------------
+    // São definidas diretamente no código (simplificação)
+    int linhaH = 2; // linha inicial do navio horizontal
+    int colunaH = 4; // coluna inicial do navio horizontal
 
-    // Exemplo para habilidade em cruz:
-    // 0 0 1 0 0
-    // 1 1 1 1 1
-    // 0 0 1 0 0
+    int linhaV = 5; // linha inicial do navio vertical
+    int colunaV = 7; // coluna inicial do navio vertical
+
+    // -----------------------------
+    // 4. VALIDAÇÃO SIMPLES DO NAVIO HORIZONTAL
+    // -----------------------------
+    if (colunaH + 2 >= 10) {
+        printf("Erro: navio horizontal sairia do tabuleiro!\n");
+        return 1;
+    }
+
+    // -----------------------------
+    // 5. POSICIONAR NAVIO HORIZONTAL
+    // -----------------------------
+    for (int i = 0; i < 3; i++) {
+        tabuleiro[linhaH][colunaH + i] = navioHorizontal[i];
+    }
+
+    // -----------------------------
+    // 6. VALIDAÇÃO SIMPLES DO NAVIO VERTICAL
+    // -----------------------------
+    if (linhaV + 2 >= 10) {
+        printf("Erro: navio vertical sairia do tabuleiro!\n");
+        return 1;
+    }
+
+    // -----------------------------
+    // 7. VERIFICAR SE HÁ SOBREPOSIÇÃO
+    // -----------------------------
+    for (int i = 0; i < 3; i++) {
+        if (tabuleiro[linhaV + i][colunaV] != 0) {
+            printf("Erro: navio vertical sobrepõe outro navio!\n");
+            return 1;
+        }
+    }
+
+    // -----------------------------
+    // 8. POSICIONAR NAVIO VERTICAL
+    // -----------------------------
+    for (int i = 0; i < 3; i++) {
+        tabuleiro[linhaV + i][colunaV] = navioVertical[i];
+    }
+
+    // -----------------------------
+    // 9. EXIBIR O TABULEIRO COMPLETO
+    // -----------------------------
+    printf("\n=== TABULEIRO BATALHA NAVAL ===\n\n");
+
+    for (int linha = 0; linha < 10; linha++) {
+        for (int coluna = 0; coluna < 10; coluna++) {
+            printf("%d ", tabuleiro[linha][coluna]); // imprime linha por linha
+        }
+        printf("\n");
+    }
 
     return 0;
 }
